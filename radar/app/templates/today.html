@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Today · PaperRadar{% endblock %}
+{% block content %}
+  {% if feed %}
+    <h1>{{ day.strftime('%A %d %B') }}</h1>
+    <p class="sub">{{ cards|length }} picks from {{ feed.stats.papers }} new papers
+      {% if not feed.stats.reranked %}· ranked by similarity only (reranker unavailable){% endif %}
+      <span class="kbd">· keys: j/k move, u 👍, d 👎, s save, o open</span></p>
+    <div class="daynav">
+      <span>{% if prev_day %}<a href="/today?day={{ prev_day }}">← {{ prev_day.strftime('%a %d %b') }}</a>{% endif %}</span>
+      <span>{% if next_day %}<a href="/today?day={{ next_day }}">{{ next_day.strftime('%a %d %b') }} →</a>{% endif %}</span>
+    </div>
+    {% for card in cards %}{% include "_card.html" %}{% endfor %}
+  {% else %}
+    <h1>No feed yet</h1>
+    <p class="sub">Feeds are built by the daily job after arXiv's announcement.</p>
+    {% if latest_papers %}
+      <form method="post" action="/feed/build">
+        <input type="hidden" name="day" value="{{ latest_papers }}">
+        <button class="primary">Build feed for {{ latest_papers.strftime('%a %d %b') }}</button>
+      </form>
+    {% else %}
+      <p class="empty">No papers ingested yet. Run <code>python -m radar.jobs.daily</code>.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}
+{% block scripts %}
+<script>
+  // Keyboard shortcuts: j/k move between cards, u/d/s rate the focused card, o opens it.
+  (function () {
+    const cards = () => Array.from(document.querySelectorAll('.card'));
+    let i = -1;
+    function focus(n) {
+      const cs = cards(); if (!cs.length) return;
+      i = Math.max(0, Math.min(cs.length - 1, n));
+      cs.forEach(c => c.classList.remove('focus'));
+      cs[i].classList.add('focus'); cs[i].scrollIntoView({block: 'nearest'});
+    }
+    document.addEventListener('keydown', e => {
+      if (e.target.matches('input, textarea') || e.metaKey || e.ctrlKey) return;
+      if (e.key === 'j') focus(i + 1);
+      else if (e.key === 'k') focus(i - 1);
+      else if (i >= 0 && 'uds'.includes(e.key)) {
+        const b = cards()[i].querySelector(`[data-key="${e.key}"]`); if (b) b.click();
+      } else if (i >= 0 && e.key === 'o') {
+        const a = cards()[i].querySelector('h3 a'); if (a) window.open(a.href, '_blank');
+      }
+    });
+  })();
+</script>
+{% endblock %}

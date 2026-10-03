@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Recorded · PaperRadar{% endblock %}
+{% block content %}
+  <h1>Recorded {{ {'up': '👍', 'down': '👎', 'save': 'saved', 'unsave': 'unsaved', 'clear': 'cleared'}[action] }}</h1>
+  <p class="sub">{{ paper.title if paper else '' }}</p>
+  <p><a href="/today">Open today's feed →</a></p>
+{% endblock %}

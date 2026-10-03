@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-09-26T18:57:30Z</responseDate>
+                <request verb="ListRecords" metadataPrefix="arXivRaw" from="2026-09-24" until="2026-09-24" set="cs:cs:LG">http://oaipmh.arxiv.org/oai</request>
+
+
+    <ListRecords>
+<record>
+                <header>
+        <identifier>oai:arXiv.org:2009.13987</identifier>
+        <datestamp>2026-09-24</datestamp>
+            <setSpec>cs:cs:LG</setSpec>
+            <setSpec>math:math:MG</setSpec>
+            <setSpec>stat:stat:ML</setSpec>
+    </header>
+
+            <metadata>
+                        <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXivRaw/ https://oaipmh.arxiv.org/OAI/arXivRaw.xsd">
+        <id>2009.13987</id>
+        <submitter>Michael Joswig</submitter>
+            <version version="v1">
+                <date>Tue, 29 Sep 2020 13:16:26 GMT</date>
+                <size>659kb</size>
+                    <source_type>D</source_type>
+            </version>
+            <version version="v2">
+                <date>Sat, 13 Feb 2021 07:39:43 GMT</date>
+                <size>658kb</size>
+                    <source_type>D</source_type>
+            </version>
+            <version version="v3">
+                <date>Wed, 23 Sep 2026 10:30:55 GMT</date>
+                <size>192kb</size>
+            </version>
+        <title>Random Polytope Descriptors</title>
+        <authors>Michael Joswig, Marek Kaluba, Lukas Ruff</authors>
+        <categories>cs.LG math.MG stat.ML</categories>
+            <comments>19 pages (v3); major rewrite (new title, more stochastic geometry, less machine learning); experiments reworked from scratch; code and data available on zenodo, doi:10.5281/zenodo.22913313</comments>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>We introduce a class of random polytopes which simultaneously generalizes several known constructions. While being fairly general, these polytopes are also computationally exceptionally benign. We indicate how these properties can be exploited for classification and clustering tasks in data analysis. Crucially, our construction lets users smoothly trade off between a tighter description of the data and faster computation.</abstract>
+    </arXivRaw>
+
+            </metadata>
+        </record>
+<resumptionToken cursor="0" completeListSize="3">tok123</resumptionToken>
+</ListRecords>
+</OAI-PMH>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}PaperRadar{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.4/dist/htmx.min.js"></script>
+</head>
+<body>
+  <header class="top"><div class="inner">
+    <a class="brand" href="/today">PaperRadar</a>
+    <nav>
+      {% set here = request.url.path %}
+      <a href="/today" class="{{ 'active' if here.startswith('/today') }}">Today</a>
+      <a href="/interests" class="{{ 'active' if here.startswith('/interests') }}">Interests</a>
+      <a href="/library" class="{{ 'active' if here.startswith('/library') }}">Library</a>
+      <a href="/search" class="{{ 'active' if here.startswith('/search') }}">Search</a>
+      <a href="/status" class="{{ 'active' if here.startswith('/status') }}">Status</a>
+    </nav>
+  </div></header>
+  <main>{% block content %}{% endblock %}</main>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

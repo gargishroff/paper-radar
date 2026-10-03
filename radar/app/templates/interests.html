@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Interests · PaperRadar{% endblock %}
+{% block content %}
+  <h1>Interests</h1>
+  <p class="sub">Each interest gets its own search every day. Its share sets how many of the
+    day's slots it gets. The description is the query sent to the reranker, so edit it to steer
+    the interest. Edited interests are pinned: rebuilding leaves them alone.</p>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+  {% for i, papers in interests %}
+    <div class="card">
+      <div class="row" style="margin-top:0">
+        <div class="tags">
+          <span class="weight">{{ (i.weight * 100)|round|int }}% of slots</span>
+          {% if i.pinned %}<span class="tag cat">pinned</span>{% endif %}
+          {% if not papers %}<span class="tag cat">from text</span>{% endif %}
+        </div>
+      </div>
+      <div class="bar"><span style="width: {{ (i.weight * 100)|round|int }}%"></span></div>
+      <form class="stack" method="post" action="/interests/{{ i.id }}/edit">
+        <label>Name <input type="text" name="name" value="{{ i.name }}"></label>
+        <label>Description <textarea name="description">{{ i.description }}</textarea></label>
+        <div class="row" style="margin-top:0">
+          <button>Save changes</button>
+        </div>
+      </form>
+      {% if papers %}
+        <details class="abstract"><summary>{{ papers|length }} papers</summary>
+          <ul class="papers">{% for p in papers %}<li><a href="https://arxiv.org/abs/{{ p.arxiv_id }}">{{ p.title }}</a></li>{% endfor %}</ul>
+        </details>
+      {% endif %}
+      <form method="post" action="/interests/{{ i.id }}/delete"
+            onsubmit="return confirm('Delete this interest and remove its {{ papers|length }} papers from your profile?')">
+        <button style="margin-top:10px">Delete</button>
+      </form>
+    </div>
+  {% else %}
+    <p class="empty">No interests yet.</p>
+  {% endfor %}
+
+  <h2>Add an interest</h2>
+  <div class="card">
+    <form class="stack" method="post" action="/interests/new">
+      <label>From seed papers: arXiv IDs or links, separated by spaces or new lines
+        <textarea name="seeds" placeholder="2301.05217 https://arxiv.org/abs/2209.11895"></textarea></label>
+      <button class="primary">Add from papers</button>
+    </form>
+  </div>
+  <div class="card">
+    <form class="stack" method="post" action="/interests/new">
+      <label>Name <input type="text" name="name" placeholder="Efficient LLM inference"></label>
+      <label>Or describe a topic
+        <textarea name="description" placeholder="Papers on speculative decoding, KV-cache compression and quantization"></textarea></label>
+      <button class="primary">Add from description</button>
+    </form>
+  </div>
+  <form method="post" action="/interests/rebuild"
+        onsubmit="return confirm('Recluster all papers that are not in a pinned interest?')">
+    <button>Rebuild unpinned interests</button>
+  </form>
+{% endblock %}

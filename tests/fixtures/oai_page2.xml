@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-09-26T18:57:30Z</responseDate>
+                <request verb="ListRecords" metadataPrefix="arXivRaw" from="2026-09-24" until="2026-09-24" set="cs:cs:LG">http://oaipmh.arxiv.org/oai</request>
+
+
+    <ListRecords>
+<record>
+                <header>
+        <identifier>oai:arXiv.org:2602.18262</identifier>
+        <datestamp>2026-09-24</datestamp>
+            <setSpec>cs:cs:CL</setSpec>
+            <setSpec>cs:cs:AI</setSpec>
+            <setSpec>cs:cs:LG</setSpec>
+    </header>
+
+            <metadata>
+                        <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXivRaw/ https://oaipmh.arxiv.org/OAI/arXivRaw.xsd">
+        <id>2602.18262</id>
+        <submitter>Aaron Louis Eidt</submitter>
+            <version version="v1">
+                <date>Fri, 20 Feb 2026 14:45:27 GMT</date>
+                <size>4577kb</size>
+            </version>
+        <title>Simplifying Outcomes of Language Model Component Analyses with ELIA</title>
+        <authors>Aaron Louis Eidt, Nils Feldhus</authors>
+        <categories>cs.CL cs.AI cs.LG</categories>
+            <comments>EACL 2026 System Demonstrations. GitHub: https://github.com/aaron0eidt/ELIA</comments>
+            <proxy>Nils Feldhus</proxy>
+            <doi>10.18653/v1/2026.eacl-demo.9</doi>
+            <license>http://creativecommons.org/licenses/by/4.0/</license>
+            <abstract>While mechanistic interpretability has developed powerful tools to analyze the internal workings of Large Language Models (LLMs), their complexity has created an accessibility gap, limiting their use to specialists. We address this challenge by designing, building, and evaluating ELIA (Explainable Language Interpretability Analysis), an interactive web application that simplifies the outcomes of various language model component analyses for a broader audience. The system integrates three key techniques -- Attribution Analysis, Function Vector Analysis, and Circuit Tracing -- and introduces a novel methodology: using a vision-language model to automatically generate natural language explanations (NLEs) for the complex visualizations produced by these methods. The effectiveness of this approach was empirically validated through a mixed-methods user study, which revealed a clear preference for interactive, explorable interfaces over simpler, static visualizations. A key finding was that the AI-powered explanations helped bridge the knowledge gap for non-experts; a statistical analysis showed no significant correlation between a user&#39;s prior LLM experience and their comprehension scores, suggesting that the system reduced barriers to comprehension across experience levels. We conclude that an AI system can indeed simplify complex model analyses, but its true power is unlocked when paired with thoughtful, user-centered design that prioritizes interactivity, specificity, and narrative guidance.</abstract>
+    </arXivRaw>
+
+            </metadata>
+        </record>
+<record>
+                <header>
+        <identifier>oai:arXiv.org:2607.08406</identifier>
+        <datestamp>2026-09-24</datestamp>
+            <setSpec>cs:cs:LG</setSpec>
+            <setSpec>stat:stat:ML</setSpec>
+    </header>
+
+            <metadata>
+                        <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXivRaw/ https://oaipmh.arxiv.org/OAI/arXivRaw.xsd">
+        <id>2607.08406</id>
+        <submitter>Hong Zhao</submitter>
+            <version version="v1">
+                <date>Thu, 09 Jul 2026 12:31:04 GMT</date>
+                <size>5660kb</size>
+            </version>
+        <title>Beyond Backpropagation: Monte Carlo Method Can Train Deep Neural Networks</title>
+        <authors>Hong Zhao</authors>
+        <categories>cs.LG stat.ML</categories>
+            <comments>22 pages, 5 figures</comments>
+            <journal-ref>SCIENCE CHINA Physics, Mechanics &amp; Astronomy Volume 69, Issue 11: 110511 (2026)</journal-ref>
+            <doi>10.1007/s11433-026-3076-0</doi>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Backpropagation (BP) dominates deep learning training, but its reliance on gradients brings inherent troubles -- vanishing and exploding gradients. The pursuit of gradient-free methods has long been a goal in the field of artificial intelligence. This paper shows that indeed the simplest Monte Carlo algorithm implemented on a single GPU -- randomly mutate a parameter, keep it if the loss decreases, otherwise retry -- can practically train deep networks. This gradient-free method does not even need common techniques such as batch normalization or residual connections to directly train sufficiently deep networks. More remarkably, its flexibility extends to several nontrivial scenarios: it enables pure pruning training, supports discrete weights, accommodates unconventional transfer functions such as Gaussian, and reveals the substantial redundancy of deep networks. We have demonstrated its feasibility on deep networks with more than 20 layers, single-hidden-layer wide networks with up to 16,384 hidden neurons, and even a simple Transformer architecture trained on both image classification (MNIST) and character-level language modeling (Tiny Shakespeare). This simple gradient-free method may offer a complementary perspective for understanding the self-organization and learning mechanisms of neural networks, and also provides an alternative route for building physically inspired deep learning systems.</abstract>
+    </arXivRaw>
+
+            </metadata>
+        </record>
+<record>
+                <header>
+        <identifier>oai:arXiv.org:2609.21583</identifier>
+        <datestamp>2026-09-24</datestamp>
+            <setSpec>cs:cs:NE</setSpec>
+            <setSpec>cs:cs:LG</setSpec>
+            <setSpec>eess:eess:SP</setSpec>
+    </header>
+
+            <metadata>
+                        <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXivRaw/ https://oaipmh.arxiv.org/OAI/arXivRaw.xsd">
+        <id>2609.21583</id>
+        <submitter>Aidin Attar</submitter>
+            <version version="v1">
+                <date>Fri, 18 Sep 2026 10:13:00 GMT</date>
+                <size>148kb</size>
+            </version>
+        <title>Predictive Suppression Layers for Communication-Efficient Spiking Neural Networks</title>
+        <authors>Aidin Attar and Michele Rossi</authors>
+        <categories>cs.NE cs.LG eess.SP</categories>
+            <comments>6 pages, 5 figures. Accepted at the 1st Neuromorphic Physical Layer Signal Processing for Wireless Systems Workshop (NeuroPHY 2026), co-located with EWSN 2026</comments>
+            <journal-ref>Proceedings of the 2026 International Conference on Embedded Wireless Systems and Networks (EWSN &#39;26), pp. 309-314, 2026</journal-ref>
+            <doi>10.3217/za2v-bn54</doi>
+            <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+            <abstract>Feedforward Spiking Neural Networks (SNNs) typically propagate every generated spike indiscriminately, disregarding whether the information is redundant from an information-theoretic perspective. This lack of selectivity induces high redundancy in inter-layer communication, creating an expensive overhead, e.g., in scenarios involving many-core neuromorphic hardware or communication-dominated Internet-of-Things (IoT) where features are transmitted wirelessly. To address this challenge, we trade localized processing for leaner network channels by introducing a minimal predictive coding framework for SNNs. We propose two layer variants sharing a predictor block: error units, which transmit signed spiking residuals, and predictive suppression, which uses residual magnitude to dynamically gate and forward only unpredictable, &#34;surprising&#34; activity. Evaluated on the N-MNIST and Spiking Heidelberg Digits (SHD) datasets using diagnostic metrics that decouple local processing from cross-layer communication, our new predictive coding layers achieve significant communication savings. Numerical results reveal a three-fold reduction in communicated activity, while increasing the task accuracy for both datasets. The latter finding is notable, and suggests that predictive coding layers not only minimize communication overhead, but also produce output feature vectors with a higher representation power.</abstract>
+    </arXivRaw>
+
+            </metadata>
+        </record>
+<resumptionToken cursor="1" completeListSize="4"></resumptionToken>
+</ListRecords>
+</OAI-PMH>

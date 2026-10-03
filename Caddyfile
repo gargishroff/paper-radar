@@ -1,0 +1,16 @@
+# HTTPS for $DOMAIN; everything behind basic auth except signed email links, redirects and assets.
+{$DOMAIN} {
+	encode gzip
+
+	@public path /r/* /go/* /static/* /healthz
+	handle @public {
+		reverse_proxy app:8000
+	}
+
+	handle {
+		basic_auth {
+			{$BASIC_AUTH_USER} {$BASIC_AUTH_HASH}
+		}
+		reverse_proxy app:8000
+	}
+}

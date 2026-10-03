@@ -1,0 +1,10 @@
+PaperRadar · {{ feed.feed_date.strftime('%A %d %B') }} · {{ items|length }} picks from {{ feed.stats.papers }} new papers
+{{ base }}/today?day={{ feed.feed_date }}
+{% for it in items %}
+{{ loop.index }}. {{ it.paper.title }}
+   {% if it.item.slot == 'explore' %}[exploring]{% else %}[{{ it.interest or it.item.slot }}]{% endif %} {{ it.open }}
+   {{ it.item.tldr or '' }}
+   {% if it.item.why %}Why: {{ it.item.why }}{% endif %}
+   👍 {{ it.up }}
+   👎 {{ it.down }}
+{% endfor %}

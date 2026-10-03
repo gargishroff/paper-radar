@@ -1,0 +1,13 @@
+{% set q = '?feed_id=' ~ feed_id if feed_id else '' %}
+<div class="rating" id="rating-{{ arxiv_id|replace('.', '-')|replace('/', '-') }}">
+  <button hx-post="/rate/{{ arxiv_id }}/{{ 'clear' if state.rating == 'up' else 'up' }}{{ q }}"
+          hx-target="closest .rating" hx-swap="outerHTML" data-key="u"
+          class="{{ 'on-up' if state.rating == 'up' }}" title="More like this (u)">👍</button>
+  <button hx-post="/rate/{{ arxiv_id }}/{{ 'clear' if state.rating == 'down' else 'down' }}{{ q }}"
+          hx-target="closest .rating" hx-swap="outerHTML" data-key="d"
+          class="{{ 'on-down' if state.rating == 'down' }}" title="Less like this (d)">👎</button>
+  <button hx-post="/rate/{{ arxiv_id }}/{{ 'unsave' if state.saved else 'save' }}{{ q }}"
+          hx-target="closest .rating" hx-swap="outerHTML" data-key="s"
+          class="{{ 'on-save' if state.saved }}" title="Save to library (s)">
+    {{ 'Saved' if state.saved else 'Save' }}</button>
+</div>

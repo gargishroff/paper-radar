@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Welcome · PaperRadar{% endblock %}
+{% block content %}
+  <h1>Set up PaperRadar</h1>
+  <p class="sub">Tell PaperRadar what you work on. Any one of the three is enough; you can add
+    more interests later. Setup fetches and embeds your papers, which takes a minute.</p>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+  <form class="stack card" method="post" action="/onboarding">
+    <label>Your name, as it appears on your papers <input type="text" name="name" required></label>
+    <label>Email for the daily digest <input type="email" name="email"></label>
+    <label>Semantic Scholar author ID: your papers become your profile
+      <input type="text" name="s2" placeholder="e.g. 12345678: the number at the end of your semanticscholar.org/author/… URL"></label>
+    <label>Papers you like: arXiv IDs or links
+      <textarea name="seeds" placeholder="2301.05217 2209.11895"></textarea></label>
+    <label>A topic, as "Name: description"
+      <input type="text" name="topic" placeholder="Efficient inference: Papers on speculative decoding and KV-cache compression"></label>
+    <button class="primary">Create my radar</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html><body style="margin:0;background:#f4f4f1;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#1d1d1b">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 12px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px">
+  <tr><td style="padding:0 4px 16px">
+    <div style="font-size:20px;font-weight:700">PaperRadar · {{ feed.feed_date.strftime('%A %d %B') }}</div>
+    <div style="font-size:14px;color:#6b6b66">{{ items|length }} picks from {{ feed.stats.papers }} new papers ·
+      <a href="{{ base }}/today?day={{ feed.feed_date }}" style="color:#2f5bd3">open in PaperRadar</a></div>
+  </td></tr>
+  {% for it in items %}
+  <tr><td style="background:#fff;border:1px solid #e6e5e0;border-radius:10px;padding:16px 18px">
+    <div style="font-size:12px;color:{{ '#8a5a00' if it.item.slot == 'explore' else '#2f5bd3' }}">
+      {% if it.item.slot == 'explore' %}exploring{% elif it.item.slot == 'rule' %}co-author{% else %}{{ it.interest or '' }}{% endif %}
+      <span style="color:#6b6b66"> · {{ it.paper.primary_cat }}</span></div>
+    <div style="font-size:16px;font-weight:650;line-height:1.35;margin:6px 0 4px">
+      <a href="{{ it.open }}" style="color:#1d1d1b;text-decoration:none">{{ it.paper.title }}</a></div>
+    <div style="font-size:13px;color:#6b6b66">{{ it.paper.authors[:4]|join(', ') }}{% if it.paper.authors|length > 4 %} et al.{% endif %}</div>
+    {% if it.item.tldr %}<div style="font-size:15px;line-height:1.5;margin:8px 0 4px">{{ it.item.tldr }}</div>{% endif %}
+    {% if it.item.why %}<div style="font-size:14px;line-height:1.5;color:#6b6b66"><b style="color:#1d1d1b">Why:</b> {{ it.item.why }}</div>{% endif %}
+    <div style="margin-top:12px;font-size:14px">
+      <a href="{{ it.up }}" style="text-decoration:none;border:1px solid #e6e5e0;border-radius:8px;padding:5px 10px;color:#1d1d1b">👍</a>&nbsp;
+      <a href="{{ it.down }}" style="text-decoration:none;border:1px solid #e6e5e0;border-radius:8px;padding:5px 10px;color:#1d1d1b">👎</a>&nbsp;
+      <a href="{{ it.save }}" style="text-decoration:none;border:1px solid #e6e5e0;border-radius:8px;padding:5px 10px;color:#1d1d1b">Save</a>
+      &nbsp;&nbsp;<a href="{{ it.pdf }}" style="color:#2f5bd3">PDF</a>
+    </div>
+  </td></tr>
+  <tr><td style="height:12px"></td></tr>
+  {% endfor %}
+  <tr><td style="font-size:12px;color:#6b6b66;padding:4px">Ratings teach PaperRadar what you want.
+    <a href="{{ base }}/interests" style="color:#2f5bd3">Edit interests</a></td></tr>
+</table></td></tr></table>
+</body></html>

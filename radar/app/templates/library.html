@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Library · PaperRadar{% endblock %}
+{% block content %}
+  <h1>Library</h1>
+  <p class="sub">{{ cards|length }} saved papers · <a href="/library.bib">Export BibTeX</a></p>
+  {% for card in cards %}{% include "_card.html" %}{% else %}
+    <p class="empty">Nothing saved yet.</p>
+  {% endfor %}
+{% endblock %}

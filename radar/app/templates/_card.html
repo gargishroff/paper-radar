@@ -1,0 +1,28 @@
+{% set p = card.paper %}
+{% set q = '&feed_id=' ~ card.feed_id if card.feed_id else '' %}
+<article class="card" tabindex="-1">
+  <div class="tags">
+    {% if card.item and card.item.slot == 'explore' %}<span class="tag explore">exploring</span>
+    {% elif card.item and card.item.slot == 'rule' %}<span class="tag rule">co-author</span>{% endif %}
+    {% if card.interest %}<span class="tag">{{ card.interest }}</span>{% endif %}
+    <span class="tag cat">{{ p.primary_cat }}</span>
+    {% if p.has_code %}<span class="tag cat">code</span>{% endif %}
+  </div>
+  <h3><a href="/go/{{ p.arxiv_id }}?to=abs{{ q }}" target="_blank" rel="noopener">{{ p.title }}</a></h3>
+  <div class="meta">
+    {{ p.authors[:4]|join(', ') }}{% if p.authors|length > 4 %} et al.{% endif %}
+    · {{ p.arxiv_id }} · {{ p.published_at.strftime('%d %b %Y') }}
+  </div>
+  {% if card.item and card.item.tldr %}
+    <p class="tldr">{{ card.item.tldr }}</p>
+    {% if card.item.why %}<p class="why"><b>Why:</b> {{ card.item.why }}</p>{% endif %}
+  {% endif %}
+  <details class="abstract"><summary>Abstract</summary><p>{{ p.abstract }}</p></details>
+  <div class="row">
+    {% with arxiv_id=p.arxiv_id, state=card.state, feed_id=card.feed_id %}{% include "_rating.html" %}{% endwith %}
+    <div class="links">
+      <a href="/go/{{ p.arxiv_id }}?to=pdf{{ q }}" target="_blank" rel="noopener">PDF</a>
+      <a href="/go/{{ p.arxiv_id }}?to=abs{{ q }}" target="_blank" rel="noopener">arXiv</a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Search · PaperRadar{% endblock %}
+{% block content %}
+  <h1>Search</h1>
+  <p class="sub">Semantic search over every paper PaperRadar has stored. Each search uses one
+    Embed call.</p>
+  <form method="get" action="/search" style="margin-bottom:18px">
+    <input type="search" name="q" value="{{ q }}" placeholder="e.g. sparse autoencoders for vision models" autofocus>
+  </form>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+  {% for card in cards %}{% include "_card.html" %}{% else %}
+    {% if q %}<p class="empty">No results.</p>{% endif %}
+  {% endfor %}
+{% endblock %}

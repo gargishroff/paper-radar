@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Status · PaperRadar{% endblock %}
+{% block content %}
+  <h1>Status</h1>
+  <p class="sub">{{ n_papers }} papers stored · {{ n_vectors }} embedded
+    {% if last_feed %}· last feed {{ last_feed.feed_date.strftime('%a %d %b') }}{% endif %}</p>
+
+  <h2>Cohere calls this month: {{ calls }} of {{ budget }}</h2>
+  <div class="bar"><span style="width: {{ [100, (calls / budget * 100)|round|int]|min }}%"></span></div>
+  <table>
+    <tr><th>Endpoint</th><th>Calls</th><th>Billed units</th></tr>
+    {% for endpoint, n, units in usage %}<tr><td>{{ endpoint }}</td><td>{{ n }}</td><td>{{ units }}</td></tr>{% endfor %}
+  </table>
+
+  <h2>Recent jobs</h2>
+  <table>
+    <tr><th>Job</th><th>Started</th><th>Status</th><th>Details</th></tr>
+    {% for r in runs %}
+      <tr>
+        <td>{{ r.job }}</td>
+        <td>{{ r.started_at.strftime('%d %b %H:%M') }}</td>
+        <td class="{{ r.status }}">{{ r.status }}</td>
+        <td>{% if r.error %}<details><summary>error</summary><pre style="white-space:pre-wrap;font-size:0.75rem">{{ r.error[-1500:] }}</pre></details>
+            {% else %}{{ r.stats|tojson if r.stats else '' }}{% endif %}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

@@ -1,0 +1,38 @@
+# Server deployment: `make deploy`. Adds HTTPS + basic auth (Caddy) and nightly backups.
+services:
+  app:
+    ports: !reset []
+    environment:
+      APP_BASE_URL: https://${DOMAIN}
+
+  worker:
+    environment:
+      APP_BASE_URL: https://${DOMAIN}
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      DOMAIN: ${DOMAIN}
+      BASIC_AUTH_USER: ${BASIC_AUTH_USER}
+      BASIC_AUTH_HASH: ${BASIC_AUTH_HASH}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    depends_on: [app]
+
+  # Nightly compressed dump, 14 days kept; copy ./backups off the server.
+  backup:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD:-radar}
+    volumes:
+      - ./backups:/backups
+    entrypoint: ["sh", "-c", "while true; do pg_dump -h db -U radar paperradar | gzip > /backups/paperradar-$$(date +%F).sql.gz; find /backups -name '*.sql.gz' -mtime +14 -delete; sleep 86400; done"]
+    depends_on:
+      db: {condition: service_healthy}
+
+volumes:
+  caddy_data:

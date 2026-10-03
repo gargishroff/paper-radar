@@ -1,0 +1,51 @@
+# Local use: `make up`, then open http://localhost:8000. Only COHERE_API_KEY is required.
+x-radar: &radar
+  build: .
+  env_file: .env
+  environment:
+    DATABASE_URL: postgresql+psycopg://radar:${POSTGRES_PASSWORD:-radar}@db/paperradar
+  restart: unless-stopped
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: radar
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-radar}
+      POSTGRES_DB: paperradar
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U radar -d paperradar"]
+      interval: 5s
+      retries: 10
+
+  migrate:
+    <<: *radar
+    command: ["alembic", "upgrade", "head"]
+    restart: "no"
+    depends_on:
+      db: {condition: service_healthy}
+
+  app:
+    <<: *radar
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')"]
+      interval: 30s
+
+  # Loads recent papers on first start, then runs the daily job at DAILY_HOUR.
+  worker:
+    <<: *radar
+    command: ["python", "-m", "radar.jobs.scheduler"]
+    volumes:
+      - digests:/app/data/digests
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+
+volumes:
+  pgdata:
+  digests:
